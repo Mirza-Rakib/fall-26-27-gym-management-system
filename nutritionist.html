@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <!-- Nutritionist dashboard. Made by: Mohona Akter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nutritionist dashboard of FitHub Gym">
+  <title>Nutritionist | FitHub Gym</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Fit<span>Hub</span></a>
+    <div class="user-info">
+      <span class="badge orange">Nutritionist</span>
+      <span>Welcome, Mohona Akter</span>
+      <a href="index.html" class="btn btn-small btn-light">Logout</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+      <button type="button" id="nav-dietSection" onclick="showSection('dietSection')">Diet Plans</button>
+      <button type="button" id="nav-calorieSection" onclick="showSection('calorieSection')">1. Calorie Calculator</button>
+      <button type="button" id="nav-macroSection" onclick="showSection('macroSection')">2. Macro Split Guide</button>
+      <button type="button" id="nav-mealSection" onclick="showSection('mealSection')">3. Meal Planner</button>
+  </nav>
+
+  <main class="container">
+
+      <!-- Diet plans: create, read, update, delete and search -->
+      <section id="dietSection" class="page-section">
+        <h2 class="page-title">Diet Plans</h2>
+        <p class="page-subtitle">How a plan is made: <strong>1.</strong> work out the member's calories &rarr;
+          save them as a diet plan here &rarr; <strong>2.</strong> check the protein / carbs / fat split &rarr;
+          <strong>3.</strong> plan the meals. The member then sees the plan on their dashboard.</p>
+
+        <div id="dietMessage" class="message"></div>
+
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h3 id="dietFormTitle">New Diet Plan</h3>
+              <form id="dietForm" onsubmit="return saveDietPlan()">
+                <fieldset>
+                  <legend>Plan details</legend>
+                  <table class="form-table">
+                    <tr>
+                      <td><label for="dietMember">Member:</label></td>
+                      <td>
+                        <select id="dietMember" onchange="showDietMemberInfo()"></select>   <!-- options built by fillMemberSelect() -->
+                        <span class="error" id="dietMemberError"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Goal:</td>
+                      <td>
+                        <input type="radio" id="goalLose" name="dietGoal" value="Lose">
+                        <label for="goalLose" class="option-label">Lose</label>
+                        <input type="radio" id="goalGain" name="dietGoal" value="Gain">
+                        <label for="goalGain" class="option-label">Gain</label>
+                        <input type="radio" id="goalMaintain" name="dietGoal" value="Maintain">
+                        <label for="goalMaintain" class="option-label">Maintain</label>
+                        <span class="error" id="dietGoalError"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label for="dietStart">Start date:</label></td>
+                      <td>
+                        <input type="date" id="dietStart">
+                        <span class="error" id="dietStartError"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label for="dietCalories">Daily calories:</label></td>
+                      <td>
+                        <input type="number" id="dietCalories" min="1200" max="4000" placeholder="1200 - 4000">
+                        <span class="error" id="dietCaloriesError"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label for="dietMeals">Meals per day:</label></td>
+                      <td>
+                        <input type="number" id="dietMeals" min="3" max="6" placeholder="3 - 6">
+                        <span class="error" id="dietMealsError"></span>
+                      </td>
+                    </tr>
+                  </table>
+                  <p class="hint" id="dietMemberInfo"></p>
+                </fieldset>
+                <fieldset>
+                  <legend>Food restrictions</legend>
+                  <input type="checkbox" id="resBeef" name="dietRestrictions" value="No beef">
+                  <label for="resBeef" class="option-label">No beef</label>
+                  <input type="checkbox" id="resLactose" name="dietRestrictions" value="Lactose-free">
+                  <label for="resLactose" class="option-label">Lactose-free</label>
+                  <input type="checkbox" id="resVeg" name="dietRestrictions" value="Vegetarian">
+                  <label for="resVeg" class="option-label">Vegetarian</label>
+                  <input type="checkbox" id="resSugar" name="dietRestrictions" value="Low sugar">
+                  <label for="resSugar" class="option-label">Low sugar</label>
+                </fieldset>
+                <fieldset>
+                  <legend>Notes</legend>
+                  <textarea id="dietNotes" placeholder="Advice for the member (optional)" onkeyup="countNoteCharacters()"></textarea>
+                  <span class="char-counter" id="noteCounter">0 / 200</span>
+                  <span class="error" id="dietNotesError"></span>
+                </fieldset>
+                <input type="submit" id="dietSaveButton" class="btn" value="Save Plan">
+                <input type="reset" class="btn btn-secondary" value="Cancel" onclick="resetDietForm()">
+              </form>
+            </div>
+          </div>
+
+          <div class="col-wide">
+            <div class="card">
+              <h3>All diet plans</h3>
+              <div class="search-bar">
+                <input type="text" id="dietSearch" placeholder="Search by member name, member ID or notes..." onkeyup="renderDietPlans()">
+                <select id="dietGoalFilter" onchange="renderDietPlans()">
+                  <option value="All">All goals</option>
+                  <option value="Lose">Lose</option>
+                  <option value="Gain">Gain</option>
+                  <option value="Maintain">Maintain</option>
+                </select>
+              </div>
+              <p class="result-count" id="dietCount"></p>
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>ID</th><th>Member</th><th>Goal</th><th>Calories</th><th>Meals</th><th>Restrictions</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody id="dietTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 1: calorie calculator (step 1) -->
+      <section id="calorieSection" class="page-section">
+        <h2 class="page-title">1. Calorie Calculator</h2>
+        <p class="page-subtitle">Choose a member to fill in their details, work out their daily calories,
+          then turn the result into a diet plan.</p>
+
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <form onsubmit="return calculateCalories()">
+                <table class="form-table">
+                  <tr>
+                    <td><label for="calMember">Member:</label></td>
+                    <td><select id="calMember" onchange="fillCalculatorFromMember()"></select>
+                        <span class="hint">Optional: fills the fields below</span></td>
+                  </tr>
+                  <tr>
+                    <td><label for="calAge">Age:</label></td>
+                    <td><input type="number" id="calAge" min="14" max="80" placeholder="14 - 80">
+                        <span class="error" id="calAgeError"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Gender:</td>
+                    <td>
+                      <input type="radio" id="calMale" name="calGender" value="Male">
+                      <label for="calMale" class="option-label">Male</label>
+                      <input type="radio" id="calFemale" name="calGender" value="Female">
+                      <label for="calFemale" class="option-label">Female</label>
+                      <span class="error" id="calGenderError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="calHeight">Height (cm):</label></td>
+                    <td><input type="number" id="calHeight" min="100" max="230" placeholder="100 - 230">
+                        <span class="error" id="calHeightError"></span></td>
+                  </tr>
+                  <tr>
+                    <td><label for="calWeight">Weight (kg):</label></td>
+                    <td><input type="number" id="calWeight" min="25" max="250" placeholder="25 - 250">
+                        <span class="error" id="calWeightError"></span></td>
+                  </tr>
+                  <tr>
+                    <td><label for="calActivity">Activity level:</label></td>
+                    <td>
+                      <select id="calActivity">
+                        <option value="">-- Select --</option>
+                        <option value="1.2">Little or no exercise</option>
+                        <option value="1.375">Light (1-3 days a week)</option>
+                        <option value="1.55">Moderate (3-5 days a week)</option>
+                        <option value="1.725">Hard (6-7 days a week)</option>
+                      </select>
+                      <span class="error" id="calActivityError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="calGoal">Goal:</label></td>
+                    <td>
+                      <select id="calGoal">
+                        <option value="Lose">Lose weight (-500 kcal)</option>
+                        <option value="Maintain">Maintain</option>
+                        <option value="Gain">Gain muscle (+300 kcal)</option>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+                <input type="submit" class="btn" value="Calculate">
+              </form>
+            </div>
+          </div>
+          <div class="col">
+            <div class="result-box" id="calorieResult">
+              <p>Daily calories needed:</p>
+              <p class="big" id="calorieNumber"></p>
+              <p id="calorieDetails"></p>
+              <button type="button" class="btn" onclick="useCaloriesInPlan()">Create a diet plan with this &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 2: macro split guide (step 2) -->
+      <section id="macroSection" class="page-section">
+        <h2 class="page-title">2. Macro Split Guide</h2>
+        <p class="page-subtitle">How a diet plan's calories are split between protein, carbs and fat.
+          The protein target is used again in the Meal Planner.</p>
+
+        <div class="card">
+          <div class="row">
+            <div class="col">
+              <label for="macroPlan">Diet plan:</label>
+              <select id="macroPlan" onchange="useMacroPlan()"></select>   <!-- built from dietPlans -->
+            </div>
+            <div class="col">
+              <label for="macroGoal">Goal:</label>
+              <select id="macroGoal" onchange="showMacros()">
+                <option value="Lose">Lose weight</option>
+                <option value="Maintain">Maintain</option>
+                <option value="Gain">Gain muscle</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="macroCalories">Daily calories:</label>
+              <input type="number" id="macroCalories" value="2000" min="1200" max="4000" onkeyup="showMacros()" onchange="showMacros()">
+              <span class="error" id="macroCaloriesError"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="bar-row">
+            <span class="bar-label">Protein</span>
+            <div class="bar-track"><div class="bar-fill" id="proteinBar"></div></div>
+            <span class="bar-value" id="proteinValue"></span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Carbohydrates</span>
+            <div class="bar-track"><div class="bar-fill" id="carbBar"></div></div>
+            <span class="bar-value" id="carbValue"></span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Fat</span>
+            <div class="bar-track"><div class="bar-fill" id="fatBar"></div></div>
+            <span class="bar-value" id="fatValue"></span>
+          </div>
+          <p class="hint" id="macroTip"></p>
+          <button type="button" class="btn" onclick="planMealsFromMacros()">Plan meals for this diet plan &rarr;</button>
+          <span class="error" id="macroPlanError"></span>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 3: meal planner (step 3) -->
+      <section id="mealSection" class="page-section">
+        <h2 class="page-title">3. Meal Planner</h2>
+        <p class="page-subtitle">Build a day of local meals for a diet plan. The calorie target comes from the plan and the
+          protein target from the Macro Split Guide. Save it and the member sees it.</p>
+
+        <div id="mealMessage" class="message"></div>
+
+        <div class="card">
+          <div class="row">
+            <div class="col">
+              <label for="mealDietPlan">Diet plan:</label>
+              <select id="mealDietPlan" onchange="loadMealsFromPlan()"></select>   <!-- built from dietPlans -->
+              <span class="error" id="mealDietPlanError"></span>
+            </div>
+            <div class="col">
+              <label for="mealTarget">Daily target (kcal):</label>
+              <input type="number" id="mealTarget" value="2000" min="1200" max="4000" onchange="renderMeals()">
+              <span class="error" id="mealTargetError"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="mealTime">Meal:</label>
+              <select id="mealTime">
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snack">Snack</option>
+                <option value="Dinner">Dinner</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="mealFood">Food:</label>
+              <select id="mealFood"></select>   <!-- built from the foods array -->
+              <span class="error" id="mealFoodError"></span>
+            </div>
+            <div class="col">
+              <label for="mealServings">Servings:</label>
+              <input type="number" id="mealServings" value="1" min="1" max="5">
+              <span class="error" id="mealServingsError"></span>
+            </div>
+          </div>
+          <button type="button" class="btn" onclick="addFoodToMeal()">Add Food</button>
+          <button type="button" class="btn btn-secondary" onclick="clearMeals()">Clear Day</button>
+          <button type="button" class="btn btn-success" onclick="saveMealsToPlan()">Save to Diet Plan</button>
+          <p class="totals" id="mealTotals"></p>
+          <p class="totals" id="proteinTotals"></p>
+        </div>
+
+        <!-- A food that is not in the list can be added; it then appears in the Food drop-down -->
+        <div class="card">
+          <h3>Food not in the list?</h3>
+          <div id="customFoodMessage" class="message"></div>
+          <form id="customFoodForm" onsubmit="return addCustomFood()">
+            <div class="row">
+              <div class="col">
+                <label for="customName">Food and serving:</label>
+                <input type="text" id="customName" placeholder="e.g. Khichuri (1 plate)">
+                <span class="error" id="customNameError"></span>
+              </div>
+              <div class="col">
+                <label for="customCalories">Calories per serving (kcal):</label>
+                <input type="number" id="customCalories" min="1" max="1500" placeholder="1 - 1500">
+                <span class="error" id="customCaloriesError"></span>
+              </div>
+              <div class="col">
+                <label for="customProtein">Protein per serving (g):</label>
+                <input type="number" id="customProtein" min="0" max="150" placeholder="0 - 150">
+                <span class="error" id="customProteinError"></span>
+              </div>
+            </div>
+            <input type="submit" class="btn" value="Add to Food List">
+          </form>
+        </div>
+
+        <div class="meal-grid" id="mealGrid"></div>
+      </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/nutritionist.js"></script>
+</body>
+</html>
