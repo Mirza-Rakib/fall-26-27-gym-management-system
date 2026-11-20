@@ -195,3 +195,67 @@
           </fieldset>
 
           <!-- Step 3c: Nutritionist only -->
+          <fieldset id="nutritionistFields" class="type-fields">
+            <legend>3. Nutritionist details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="certificateNo">Certificate number:</label></td>
+                <td><input type="text" id="certificateNo" name="certificateNo" placeholder="NUT-1234">
+                    <span class="error" id="certificateNoError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="nutriSpecial">Specialization:</label></td>
+                <td>
+                  <select id="nutriSpecial" name="nutriSpecial">
+                    <option value="">-- Select --</option>
+                    <option value="Weight loss">Weight loss</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Clinical">Clinical</option>
+                  </select>
+                  <span class="error" id="nutriSpecialError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="nutriExperience">Years of experience:</label></td>
+                <td><input type="number" id="nutriExperience" name="nutriExperience" min="0" max="40" placeholder="0-40">
+                    <span class="error" id="nutriExperienceError"></span></td>
+              </tr>
+              <tr>
+                <td>Available days:</td>
+                <td>
+                  <input type="checkbox" id="daySat" name="nutriDays" value="Sat"><label for="daySat" class="option-label">Sat</label>
+                  <input type="checkbox" id="daySun" name="nutriDays" value="Sun"><label for="daySun" class="option-label">Sun</label>
+                  <input type="checkbox" id="dayMon" name="nutriDays" value="Mon"><label for="dayMon" class="option-label">Mon</label>
+                  <input type="checkbox" id="dayTue" name="nutriDays" value="Tue"><label for="dayTue" class="option-label">Tue</label>
+                  <input type="checkbox" id="dayWed" name="nutriDays" value="Wed"><label for="dayWed" class="option-label">Wed</label>
+                  <input type="checkbox" id="dayThu" name="nutriDays" value="Thu"><label for="dayThu" class="option-label">Thu</label>
+                  <span class="error" id="nutriDaysError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <p>
+            <input type="checkbox" id="terms" onchange="toggleRegisterButton()">
+            <label for="terms" class="option-label">I agree to the gym rules and terms</label>
+          </p>
+
+          <!-- disabled until the terms box is ticked -->
+          <input type="submit" id="registerButton" class="btn" value="Create Account" disabled>
+          <input type="reset" class="btn btn-secondary" value="Clear" onclick="resetRegisterForm()">
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>
