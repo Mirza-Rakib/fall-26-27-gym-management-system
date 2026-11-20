@@ -4,7 +4,7 @@
    Loaded after data.js and before each page's own script:
    <script src="js/data.js"></script>
    <script src="js/common.js"></script>
-   <script src="js/admin.js"></script>
+   <script src="js/nutritionist.js"></script>
 */
 
 

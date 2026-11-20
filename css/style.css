@@ -499,8 +499,7 @@ textarea {
 }
 
 .meal-card ul, .goal-list {
-  padding-left: 0;
-  list-style: none;
+  padding: 0;
 }
 
 .meal-card li, .goal-list li {
@@ -595,7 +594,7 @@ textarea {
 }
 
 .plan-card ul {
-  padding-left: 18px;
+  padding: 0 0 0 18px;
 }
 
 .role-card {
@@ -675,10 +674,5 @@ textarea {
 }
 
 
-/* Rakib: Admin dashboard */
-
-
-/* Asif: Trainer dashboard */
-
-
-/* Tanvir: Member dashboard */
+/* Admin, Trainer and Member dashboards: their styles will be added here
+   by the other group members when they upload their parts. */
