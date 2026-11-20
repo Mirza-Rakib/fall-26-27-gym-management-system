@@ -160,9 +160,10 @@ and inside every dashboard the features work on the same records:
 
 | Member | ID | Part of the project |
 |---|---|---|
-| AKTER, MOHONA (leader) | 23-53200-3 | `index.html`, `js/home.js`, `nutritionist.html`, `js/nutritionist.js`, her section of `css/style.css`, `README.md` |
-| RAKIB, MIRZA MOHAMMAD | 23-53160-3 | `login.html`, `js/login.js`, `admin.html`, `js/admin.js`, his section of `css/style.css` |
-| JUBAYER, KHONDOKER MD ASIF | 23-51038-1 | `register.html`, `js/register.js`, `trainer.html`, `js/trainer.js`, his section of `css/style.css` |
+| AKTER, MOHONA (leader) | 23-53200-3 | `index.html`, `js/home.js`, `login.html`, `js/login.js`, `register.html`, `js/register.js`, `nutritionist.html`, `js/nutritionist.js`, her section of `css/style.css`, `README.md` |
+| RAKIB, MIRZA MOHAMMAD | 23-53160-3 | `admin.html`, `js/admin.js`, his section of `css/style.css` |
+| JUBAYER, KHONDOKER MD ASIF | 23-51038-1 | `trainer.html`, `js/trainer.js`, his section of `css/style.css` |
 | BHUIYAN, TANVIR HOSSAIN | 22-46731-1 | `member.html`, `js/member.js`, his section of `css/style.css` |
 
 The shared base (the first part of `css/style.css`, `js/data.js` and `js/common.js`) was planned by the whole group and uploaded first by the leader, so every member's pages work on their own branch.
+The Login and Sign up pages were moved to Mohona's part during the project.
