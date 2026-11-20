@@ -81,3 +81,26 @@ function validateLogin() {
 }
 
 
+function clearLoginErrors() {
+  clearErrors(["username", "password"]);
+  hideMessage("loginMessage");
+}
+
+
+// "Show password" checkbox: change the input type between password and text
+function togglePassword() {
+  let passwordInput = document.getElementById("password");
+  if (document.getElementById("showPassword").checked) {
+    passwordInput.type = "text";
+  } else {
+    passwordInput.type = "password";
+  }
+}
+
+
+// The "Use" buttons fill in a demo account
+function fillDemo(username, password) {
+  document.getElementById("username").value = username;
+  document.getElementById("password").value = password;
+  clearLoginErrors();
+}
