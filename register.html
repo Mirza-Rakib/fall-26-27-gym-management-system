@@ -150,3 +150,48 @@
           </fieldset>
 
           <!-- Step 3b: Trainer only -->
+          <fieldset id="trainerFields" class="type-fields">
+            <legend>3. Trainer details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="employeeId">Employee ID:</label></td>
+                <td><input type="text" id="employeeId" name="employeeId" placeholder="TR-1234">
+                    <span class="error" id="employeeIdError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="trainerSpecial">Specialization:</label></td>
+                <td>
+                  <select id="trainerSpecial" name="trainerSpecial">
+                    <option value="">-- Select --</option>
+                    <option value="Strength">Strength</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="HIIT">HIIT</option>
+                  </select>
+                  <span class="error" id="trainerSpecialError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="trainerExperience">Years of experience:</label></td>
+                <td><input type="number" id="trainerExperience" name="trainerExperience" min="0" max="40" placeholder="0-40">
+                    <span class="error" id="trainerExperienceError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="certification">Certification:</label></td>
+                <td><input type="text" id="certification" name="certification" placeholder="e.g. ACE Certified">
+                    <span class="error" id="certificationError"></span></td>
+              </tr>
+              <tr>
+                <td>Preferred shift:</td>
+                <td>
+                  <input type="radio" id="shiftMorning" name="shift" value="Morning">
+                  <label for="shiftMorning" class="option-label">Morning</label>
+                  <input type="radio" id="shiftEvening" name="shift" value="Evening">
+                  <label for="shiftEvening" class="option-label">Evening</label>
+                  <span class="error" id="shiftError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 3c: Nutritionist only -->
