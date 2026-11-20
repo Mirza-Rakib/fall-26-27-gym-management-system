@@ -29,3 +29,88 @@
   </nav>
 
   <main class="container">
+    <div class="auth-box wide">
+      <div class="card">
+        <h2 class="page-title">Create your account</h2>
+        <p class="page-subtitle">Members can log in straight away. Trainers and nutritionists are
+          checked by the admin first. Admin accounts are not created here.</p>
+
+        <div id="registerMessage" class="message"></div>
+
+        <!-- action="login.html" method="get" like the login form. validateRegister() returns false
+             after saving, so the page stays here and shows the message.
+             The password inputs have NO name, so they are never put in the URL. -->
+        <form id="registerForm" action="login.html" method="get" onsubmit="return validateRegister()">
+
+          <!-- Step 1: type of user. register.js shows the matching fieldset below. -->
+          <fieldset>
+            <legend>1. I am signing up as</legend>
+            <table class="form-table">
+              <tr>
+                <td>Type of user:</td>
+                <td>
+                  <input type="radio" id="typeMember" name="userType" value="Member" onchange="showRoleFields()">
+                  <label for="typeMember" class="option-label">Member</label>
+                  <input type="radio" id="typeTrainer" name="userType" value="Trainer" onchange="showRoleFields()">
+                  <label for="typeTrainer" class="option-label">Trainer</label>
+                  <input type="radio" id="typeNutritionist" name="userType" value="Nutritionist" onchange="showRoleFields()">
+                  <label for="typeNutritionist" class="option-label">Nutritionist</label>
+                  <span class="error" id="roleError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 2: fields every user fills in -->
+          <fieldset>
+            <legend>2. Personal details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="fullName">Full name:</label></td>
+                <td><input type="text" id="fullName" name="fullName" placeholder="e.g. Rahim Uddin">
+                    <span class="error" id="fullNameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" placeholder="you@mail.com">
+                    <span class="error" id="emailError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="phone">Mobile:</label></td>
+                <td><input type="tel" id="phone" name="phone" placeholder="11 digits, e.g. 01712345678">
+                    <span class="error" id="phoneError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="dob">Date of birth:</label></td>
+                <td><input type="date" id="dob" name="dob">
+                    <span class="error" id="dobError"></span></td>
+              </tr>
+              <tr>
+                <td>Gender:</td>
+                <td>
+                  <input type="radio" id="genderMale" name="gender" value="Male">
+                  <label for="genderMale" class="option-label">Male</label>
+                  <input type="radio" id="genderFemale" name="gender" value="Female">
+                  <label for="genderFemale" class="option-label">Female</label>
+                  <span class="error" id="genderError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="newUsername">Username:</label></td>
+                <td><input type="text" id="newUsername" name="newUsername" placeholder="4-15 letters or digits">
+                    <span class="error" id="newUsernameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="newPassword">Password:</label></td>
+                <td><input type="password" id="newPassword" placeholder="At least 8 characters with a digit">
+                    <span class="error" id="newPasswordError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="confirmPassword">Confirm password:</label></td>
+                <td><input type="password" id="confirmPassword" placeholder="Type the password again">
+                    <span class="error" id="confirmPasswordError"></span></td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 3a: Member only -->
