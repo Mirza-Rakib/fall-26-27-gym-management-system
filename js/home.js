@@ -79,10 +79,8 @@ function makePlanCard(plan) {
   }
   card.appendChild(list);
 
-  let join = document.createElement("a");
-  join.href = "register.html";
-  join.className = "btn btn-small";
-  join.innerHTML = "Join with this plan";
+  let join = document.createElement("p");
+  join.innerHTML = "<a href='register.html' class='btn btn-small'>Join with this plan</a>";
   card.appendChild(join);
 
   return card;
