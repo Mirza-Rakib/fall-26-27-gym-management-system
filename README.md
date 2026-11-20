@@ -25,7 +25,7 @@ The role stored in the account decides which dashboard opens.
 | Admin        | `admin`        | `admin1234` (dashboard not uploaded yet) |
 | Trainer      | `trainer`      | `trainer123` (dashboard not uploaded yet) |
 | Member       | `member`       | `member123` (dashboard not uploaded yet) |
-| Trainer waiting for approval | `rafi` | `rafi12345` (login is refused until an admin approves) |
+| Trainer waiting for approval | `berry` | `berry1234` (login is refused until an admin approves) |
 
 The login page also has "Use" buttons that fill these in.
 
