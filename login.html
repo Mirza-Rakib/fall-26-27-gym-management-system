@@ -29,3 +29,39 @@
   </nav>
 
   <main class="container">
+    <div class="auth-box">
+
+      <div class="card">
+        <h2 class="page-title">Welcome back</h2>
+        <p class="page-subtitle">One login for admins, trainers, nutritionists and members.
+          We open the right dashboard for your account.</p>
+
+        <div id="loginMessage" class="message"></div>
+
+        <!-- return false = stay on the page; return true = open the page in "action".
+             login.js sets the action to the dashboard of the account's role.
+             The password input has NO name, so it is never put in the URL (method="get"). -->
+        <form id="loginForm" action="index.html" method="get" onsubmit="return validateLogin()">
+          <fieldset>
+            <legend>Your account</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="username">Username or Email:</label></td>
+                <td>
+                  <input type="text" id="username" name="username" placeholder="e.g. member or tanvir@mail.com">
+                  <span class="error" id="usernameError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="password">Password:</label></td>
+                <td>
+                  <input type="password" id="password" placeholder="Your password">
+                  <span class="error" id="passwordError"></span>
+                  <input type="checkbox" id="showPassword" onchange="togglePassword()">
+                  <label for="showPassword" class="option-label">Show password</label>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+          <input type="submit" class="btn btn-block" value="Login">
+        </form>
