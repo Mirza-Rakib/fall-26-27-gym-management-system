@@ -486,10 +486,11 @@ function fillFoodSelect() {
   for (let i = 0; i < foods.length; i++) {
     let option = document.createElement("option");
     option.value = i;                        // the index in the foods array
-    option.innerHTML = foods[i].name + " - " + foods[i].calories + " kcal";
+    let text = foods[i].name + " - " + foods[i].calories + " kcal";
     if (foods[i].custom === true) {
-      option.innerHTML += " (custom)";
+      text += " (custom)";
     }
+    option.innerHTML = text;
     select.appendChild(option);
   }
 }
@@ -663,13 +664,14 @@ function renderMeals() {
   }
 
   let totals = document.getElementById("mealTotals");
-  totals.innerHTML = "Calories: " + totalCalories + " / " + target + " kcal";
+  let totalsText = "Calories: " + totalCalories + " / " + target + " kcal";
   if (totalCalories > target) {
     totals.style.color = "#dc2626";
-    totals.innerHTML += " &middot; over by " + (totalCalories - target) + " kcal";
+    totalsText += " &middot; over by " + (totalCalories - target) + " kcal";
   } else {
     totals.style.color = "#16a34a";
   }
+  totals.innerHTML = totalsText;
 
   // protein: the target comes from the Macro Split Guide for the plan's goal
   let goal = "Maintain";
@@ -679,15 +681,16 @@ function renderMeals() {
   }
   let proteinGoal = proteinTarget(goal, target);
   let proteinText = document.getElementById("proteinTotals");
-  proteinText.innerHTML = "Protein: " + totalProtein + " / " + proteinGoal + " g (" + goal + " split from step 2)";
+  let text = "Protein: " + totalProtein + " / " + proteinGoal + " g (" + goal + " split from step 2)";
   // green when the meals give at least 90% of the protein target ("on track")
   if (totalProtein >= proteinGoal * 0.9) {
     proteinText.style.color = "#16a34a";
-    proteinText.innerHTML += " &middot; on track";
+    text += " &middot; on track";
   } else {
     proteinText.style.color = "#f59e0b";
-    proteinText.innerHTML += " &middot; add more protein";
+    text += " &middot; add more protein";
   }
+  proteinText.innerHTML = text;
 }
 
 // save the day of meals into the chosen diet plan, so the member can see it
