@@ -527,7 +527,18 @@ textarea {
 }
 
 
-/* Mohona: Home page and Nutritionist dashboard */
+/* Mohona: Home, Login, Sign up and Nutritionist dashboard */
+
+.type-fields {
+  display: none;               /* register.js shows only the chosen role's fields */
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.badge.purple { background-color: #7c3aed; }
 
 /* Home page */
 
