@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <!-- One sign-up page for Member, Trainer and Nutritionist. Made by: Mohona Akter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign up to FitHub Gym">
+  <title>Sign Up | FitHub Gym</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Fit<span>Hub</span></a>
+    <div class="user-info">
+      <a href="login.html" class="btn btn-small btn-light">Login</a>
+      <a href="register.html" class="btn btn-small">Join Now</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="index.html#plans">Membership Plans</a>
+    <a href="index.html#who">Who It's For</a>
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html#trainers">Trainers</a>
+    <a href="index.html#hours">Opening Hours</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <main class="container">
+    <div class="auth-box wide">
+      <div class="card">
+        <h2 class="page-title">Create your account</h2>
+        <p class="page-subtitle">Members can log in straight away. Trainers and nutritionists are
+          checked by the admin first. Admin accounts are not created here.</p>
+
+        <div id="registerMessage" class="message"></div>
+
+        <!-- action="login.html" method="get" like the login form. validateRegister() returns false
+             after saving, so the page stays here and shows the message.
+             The password inputs have NO name, so they are never put in the URL. -->
+        <form id="registerForm" action="login.html" method="get" onsubmit="return validateRegister()">
+
+          <!-- Step 1: type of user. register.js shows the matching fieldset below. -->
+          <fieldset>
+            <legend>1. I am signing up as</legend>
+            <table class="form-table">
+              <tr>
+                <td>Type of user:</td>
+                <td>
+                  <input type="radio" id="typeMember" name="userType" value="Member" onchange="showRoleFields()">
+                  <label for="typeMember" class="option-label">Member</label>
+                  <input type="radio" id="typeTrainer" name="userType" value="Trainer" onchange="showRoleFields()">
+                  <label for="typeTrainer" class="option-label">Trainer</label>
+                  <input type="radio" id="typeNutritionist" name="userType" value="Nutritionist" onchange="showRoleFields()">
+                  <label for="typeNutritionist" class="option-label">Nutritionist</label>
+                  <span class="error" id="roleError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 2: fields every user fills in -->
+          <fieldset>
+            <legend>2. Personal details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="fullName">Full name:</label></td>
+                <td><input type="text" id="fullName" name="fullName" placeholder="e.g. Rahim Uddin">
+                    <span class="error" id="fullNameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" placeholder="you@mail.com">
+                    <span class="error" id="emailError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="phone">Mobile:</label></td>
+                <td><input type="tel" id="phone" name="phone" placeholder="11 digits, e.g. 01712345678">
+                    <span class="error" id="phoneError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="dob">Date of birth:</label></td>
+                <td><input type="date" id="dob" name="dob">
+                    <span class="error" id="dobError"></span></td>
+              </tr>
+              <tr>
+                <td>Gender:</td>
+                <td>
+                  <input type="radio" id="genderMale" name="gender" value="Male">
+                  <label for="genderMale" class="option-label">Male</label>
+                  <input type="radio" id="genderFemale" name="gender" value="Female">
+                  <label for="genderFemale" class="option-label">Female</label>
+                  <span class="error" id="genderError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="newUsername">Username:</label></td>
+                <td><input type="text" id="newUsername" name="newUsername" placeholder="4-15 letters or digits">
+                    <span class="error" id="newUsernameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="newPassword">Password:</label></td>
+                <td><input type="password" id="newPassword" placeholder="At least 8 characters with a digit">
+                    <span class="error" id="newPasswordError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="confirmPassword">Confirm password:</label></td>
+                <td><input type="password" id="confirmPassword" placeholder="Type the password again">
+                    <span class="error" id="confirmPasswordError"></span></td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 3a: Member only -->
+          <fieldset id="memberFields" class="type-fields">
+            <legend>3. Member details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="height">Height (cm):</label></td>
+                <td><input type="number" id="height" name="height" min="100" max="230" placeholder="e.g. 170">
+                    <span class="error" id="heightError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="weight">Weight (kg):</label></td>
+                <td><input type="number" id="weight" name="weight" min="25" max="250" placeholder="e.g. 70">
+                    <span class="error" id="weightError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="goal">Fitness goal:</label></td>
+                <td>
+                  <select id="goal" name="goal">
+                    <option value="">-- Select goal --</option>
+                    <option value="Lose weight">Lose weight</option>
+                    <option value="Gain muscle">Gain muscle</option>
+                    <option value="Stay fit">Stay fit</option>
+                  </select>
+                  <span class="error" id="goalError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="planChoice">Membership plan:</label></td>
+                <td>
+                  <select id="planChoice" name="planChoice"></select>   <!-- options are added by register.js -->
+                  <span class="error" id="planChoiceError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 3b: Trainer only -->
+          <fieldset id="trainerFields" class="type-fields">
+            <legend>3. Trainer details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="employeeId">Employee ID:</label></td>
+                <td><input type="text" id="employeeId" name="employeeId" placeholder="TR-1234">
+                    <span class="error" id="employeeIdError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="trainerSpecial">Specialization:</label></td>
+                <td>
+                  <select id="trainerSpecial" name="trainerSpecial">
+                    <option value="">-- Select --</option>
+                    <option value="Strength">Strength</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="HIIT">HIIT</option>
+                  </select>
+                  <span class="error" id="trainerSpecialError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="trainerExperience">Years of experience:</label></td>
+                <td><input type="number" id="trainerExperience" name="trainerExperience" min="0" max="40" placeholder="0-40">
+                    <span class="error" id="trainerExperienceError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="certification">Certification:</label></td>
+                <td><input type="text" id="certification" name="certification" placeholder="e.g. ACE Certified">
+                    <span class="error" id="certificationError"></span></td>
+              </tr>
+              <tr>
+                <td>Preferred shift:</td>
+                <td>
+                  <input type="radio" id="shiftMorning" name="shift" value="Morning">
+                  <label for="shiftMorning" class="option-label">Morning</label>
+                  <input type="radio" id="shiftEvening" name="shift" value="Evening">
+                  <label for="shiftEvening" class="option-label">Evening</label>
+                  <span class="error" id="shiftError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!-- Step 3c: Nutritionist only -->
+          <fieldset id="nutritionistFields" class="type-fields">
+            <legend>3. Nutritionist details</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="certificateNo">Certificate number:</label></td>
+                <td><input type="text" id="certificateNo" name="certificateNo" placeholder="NUT-1234">
+                    <span class="error" id="certificateNoError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="nutriSpecial">Specialization:</label></td>
+                <td>
+                  <select id="nutriSpecial" name="nutriSpecial">
+                    <option value="">-- Select --</option>
+                    <option value="Weight loss">Weight loss</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Clinical">Clinical</option>
+                  </select>
+                  <span class="error" id="nutriSpecialError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="nutriExperience">Years of experience:</label></td>
+                <td><input type="number" id="nutriExperience" name="nutriExperience" min="0" max="40" placeholder="0-40">
+                    <span class="error" id="nutriExperienceError"></span></td>
+              </tr>
+              <tr>
+                <td>Available days:</td>
+                <td>
+                  <input type="checkbox" id="daySat" name="nutriDays" value="Sat"><label for="daySat" class="option-label">Sat</label>
+                  <input type="checkbox" id="daySun" name="nutriDays" value="Sun"><label for="daySun" class="option-label">Sun</label>
+                  <input type="checkbox" id="dayMon" name="nutriDays" value="Mon"><label for="dayMon" class="option-label">Mon</label>
+                  <input type="checkbox" id="dayTue" name="nutriDays" value="Tue"><label for="dayTue" class="option-label">Tue</label>
+                  <input type="checkbox" id="dayWed" name="nutriDays" value="Wed"><label for="dayWed" class="option-label">Wed</label>
+                  <input type="checkbox" id="dayThu" name="nutriDays" value="Thu"><label for="dayThu" class="option-label">Thu</label>
+                  <span class="error" id="nutriDaysError"></span>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <p>
+            <input type="checkbox" id="terms" onchange="toggleRegisterButton()">
+            <label for="terms" class="option-label">I agree to the gym rules and terms</label>
+          </p>
+
+          <!-- disabled until the terms box is ticked -->
+          <input type="submit" id="registerButton" class="btn" value="Create Account" disabled>
+          <input type="reset" class="btn btn-secondary" value="Clear" onclick="resetRegisterForm()">
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

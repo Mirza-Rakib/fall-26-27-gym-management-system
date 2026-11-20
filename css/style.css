@@ -527,13 +527,158 @@ textarea {
 }
 
 
-/* Mohona: Home page and Nutritionist dashboard */
+/* Mohona: Home, Login, Sign up and Nutritionist dashboard */
+
+.type-fields {
+  display: none;               /* register.js shows only the chosen role's fields */
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.badge.purple { background-color: #7c3aed; }
+
+/* Home page */
+
+.hero {
+  padding: 80px 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1f2937;
+  border-bottom: 6px solid #f97316;
+}
+
+.hero h1 {
+  margin-bottom: 10px;
+  font-size: 44px;
+  color: #ffffff;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 0 auto 25px auto;
+  font-size: 18px;
+  color: #e5e7eb;
+}
+
+.section-heading {
+  margin: 45px 0 25px 0;
+  text-align: center;
+}
+
+.plan-grid, .role-grid, .trainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.plan-card {
+  padding: 22px;
+  background-color: #ffffff;
+  border-top: 5px solid #f97316;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.plan-card .price {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ea580c;
+}
+
+.plan-card ul {
+  padding-left: 18px;
+}
+
+.role-card {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border-left: 5px solid #f97316;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.trainer-card {
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #f97316;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 70px;
+}
+
+.hours-table td, .hours-table th {
+  padding: 8px 12px;
+}
+
+.hours-table tr.today {
+  background-color: #ffedd5;
+  font-weight: bold;
+}
+
+/* "How it works": numbered steps on the home page */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.step-number {
+  position: absolute;          /* placed relative to .step */
+  top: -16px;
+  left: 20px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #f97316;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.auth-box.wide {
+  max-width: 760px;
+}
+
+.demo-accounts {
+  width: 100%;
+}
+
+.demo-accounts td {
+  padding: 6px 4px;
+}
+
+.char-counter {
+  font-size: 12px;
+  color: #6b7280;
+}
 
 
-/* Rakib: Login page and Admin dashboard */
+/* Rakib: Admin dashboard */
 
 
-/* Asif: Sign up page and Trainer dashboard */
+/* Asif: Trainer dashboard */
 
 
 /* Tanvir: Member dashboard */

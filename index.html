@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <!-- Home page (public). Made by: Mohona Akter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitHub Gym Management System - plans, trainers and opening hours">
+  <title>FitHub Gym | Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Fit<span>Hub</span></a>
+    <div class="user-info">
+      <a href="login.html" class="btn btn-small btn-light">Login</a>
+      <a href="register.html" class="btn btn-small">Join Now</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="#plans">Membership Plans</a>
+    <a href="#who">Who It's For</a>
+    <a href="#how">How It Works</a>
+    <a href="#trainers">Trainers</a>
+    <a href="#hours">Opening Hours</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Train smarter at FitHub</h1>
+    <p>Memberships, workouts, attendance, diet plans and bKash/Nagad payments, all in one place.
+       No more paper registers.</p>
+    <a href="register.html" class="btn">Become a Member</a>
+    <a href="#plans" class="btn btn-light">See Plans</a>
+  </section>
+
+  <main class="container">
+
+    <!-- Membership plans: cards are built by home.js from the plans array -->
+    <section id="plans">
+      <h2 class="section-heading">Membership Plans</h2>
+      <div class="card">
+        <div class="search-bar">
+          <input type="text" id="planSearch" placeholder="Search plans by name or facility, e.g. sauna" onkeyup="renderPlanCards()">
+          <select id="planSort" onchange="renderPlanCards()">
+            <option value="all">Any price</option>
+            <option value="under2000">Under 2,000 BDT</option>
+            <option value="over2000">2,000 BDT and more</option>
+          </select>
+        </div>
+        <p class="result-count" id="planCount"></p>
+      </div>
+      <div class="plan-grid" id="planGrid"></div>
+    </section>
+
+    <!-- Who the system is for -->
+    <section id="who">
+      <h2 class="section-heading">Who It's For</h2>
+      <div class="role-grid">
+        <div class="role-card">
+          <h3>Members</h3>
+          <p>Log progress, check your BMI, see days left on your membership and pay by bKash or Nagad.</p>
+        </div>
+        <div class="role-card">
+          <h3>Trainers</h3>
+          <p>Create workout plans, check members in and out and plan weekly classes.</p>
+        </div>
+        <div class="role-card">
+          <h3>Nutritionists</h3>
+          <p>Write diet plans, calculate calories and build meal plans with local food.</p>
+        </div>
+        <div class="role-card">
+          <h3>Admin</h3>
+          <p>Manage plans, approve staff, verify payments and watch gym statistics.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works: the steps a new member follows -->
+    <section id="how">
+      <h2 class="section-heading">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Sign up</h3>
+          <p>Open <a href="register.html">Join Now</a>, choose Member, Trainer or Nutritionist and fill in the
+             details that type needs. Trainers and nutritionists are approved by the admin.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Log in and pay</h3>
+          <p>Use the <a href="login.html">single login page</a>. Members pay for a plan with bKash or Nagad;
+             the admin checks the transaction ID and starts the membership.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Train with a plan</h3>
+          <p>Your trainer gives you workouts and checks you in, your nutritionist gives you a diet and meals,
+             and you track your weight, BMI and goal on your dashboard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trainers: cards are built by home.js from the users array -->
+    <section id="trainers">
+      <h2 class="section-heading">Meet Our Team</h2>
+      <div class="trainer-grid" id="trainerGrid"></div>
+    </section>
+
+    <!-- Opening hours: today's row is highlighted by home.js -->
+    <section id="hours">
+      <h2 class="section-heading">Opening Hours</h2>
+      <div class="card">
+        <table class="data-table hours-table">
+          <thead>
+            <tr><th>Day</th><th>Opens</th><th>Closes</th></tr>
+          </thead>
+          <tbody id="hoursBody"></tbody>
+        </table>
+        <p class="hint" id="openNow"></p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 class="section-heading">Contact Us</h2>
+      <div class="card">
+        <p><strong>Address:</strong> House 12, Road 5, Dhanmondi, Dhaka</p>
+        <p><strong>Phone:</strong> 01711-000001 &middot; <strong>Email:</strong> hello@fithub.com</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
