@@ -314,3 +314,15 @@ function validateRegister() {
 }
 
 
+// Clear button: hide the role fieldsets and errors, disable the button again
+function resetRegisterForm() {
+  clearErrors(commonFields.concat(memberFieldIds, trainerFieldIds, nutritionistFieldIds));
+  document.getElementById("memberFields").style.display = "none";
+  document.getElementById("trainerFields").style.display = "none";
+  document.getElementById("nutritionistFields").style.display = "none";
+  document.getElementById("registerButton").disabled = true;
+}
+
+
+// Run when the page loads
+fillPlanChoice();
