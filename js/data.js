@@ -36,7 +36,7 @@ let users = [
   { id: "U-008", name: "Arif Chowdhury",  username: "arif",         password: "arif12345",  email: "arif@mail.com",      phone: "01611000008", role: "Member",       status: "Blocked",
     gender: "Male", memberId: "M-005", dob: "1990-01-30", height: 175, weight: 90, goal: "Lose weight", planId: "P-01" },
 
-  { id: "U-009", name: "Rafi Uddin",      username: "rafi",         password: "rafi12345",  email: "rafi@mail.com",      phone: "01611000009", role: "Trainer",      status: "Pending",
+  { id: "U-009", name: "Berry",           username: "berry",        password: "berry1234",  email: "berry@mail.com",     phone: "01611000009", role: "Trainer",      status: "Pending",
     employeeId: "TR-1002", specialization: "Cardio", experience: 2, certification: "NASM", shift: "Evening" },
   { id: "U-010", name: "Nabila Sultana",  username: "nabila",       password: "nabila123",  email: "nabila@mail.com",    phone: "01511000010", role: "Nutritionist", status: "Pending",
     certificateNo: "NUT-1002", specialization: "Sports", experience: 1, days: ["Sat", "Mon"] }
