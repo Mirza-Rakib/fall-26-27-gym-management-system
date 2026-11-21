@@ -15,15 +15,15 @@
     <div class="user-info">
       <span class="badge purple">Admin</span>
       <span>Welcome, Mirza Mohammad Rakib</span>
-      <a href="login.html" class="btn btn-small btn-light">Logout</a>
+      <a href="index.html" class="btn btn-small btn-light">Logout</a>
     </div>
   </header>
 
   <nav class="topnav">
-      <a href="#plansSection" id="nav-plansSection">Membership Plans</a>
-      <a href="#usersSection" id="nav-usersSection">User Approval</a>
-      <a href="#paymentsSection" id="nav-paymentsSection">Payment Verification</a>
-      <a href="#statsSection" id="nav-statsSection">Gym Statistics</a>
+      <button type="button" id="nav-plansSection" onclick="showSection('plansSection')">Membership Plans</button>
+      <button type="button" id="nav-usersSection" onclick="showSection('usersSection')">User Approval</button>
+      <button type="button" id="nav-paymentsSection" onclick="showSection('paymentsSection')">Payment Verification</button>
+      <button type="button" id="nav-statsSection" onclick="showSection('statsSection')">Gym Statistics</button>
   </nav>
 
   <main class="container">
@@ -40,7 +40,7 @@
           <div class="col">
             <div class="card">
               <h3 id="planFormTitle">New Plan</h3>
-              <form id="planForm">
+              <form id="planForm" onsubmit="return savePlan()">
                 <fieldset>
                   <legend>Plan details</legend>
                   <table class="form-table">
@@ -90,7 +90,7 @@
                   <span class="error" id="planFacilitiesError"></span>
                 </fieldset>
                 <input type="submit" id="planSaveButton" class="btn" value="Save Plan">
-                <input type="reset" class="btn btn-secondary" value="Cancel">
+                <input type="reset" class="btn btn-secondary" value="Cancel" onclick="resetPlanForm()">
               </form>
             </div>
           </div>
@@ -99,8 +99,8 @@
             <div class="card">
               <h3>All plans</h3>
               <div class="search-bar">
-                <input type="text" id="planSearch" placeholder="Search by plan name or facility...">
-                <select id="planStatusFilter">
+                <input type="text" id="planSearch" placeholder="Search by plan name or facility..." onkeyup="renderPlans()">
+                <select id="planStatusFilter" onchange="renderPlans()">
                   <option value="All">All statuses</option>
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
@@ -130,15 +130,15 @@
 
         <div class="card">
           <div class="search-bar">
-            <input type="text" id="userSearch" placeholder="Search by name, username or email...">
-            <select id="userRoleFilter">
+            <input type="text" id="userSearch" placeholder="Search by name, username or email..." onkeyup="renderUsers()">
+            <select id="userRoleFilter" onchange="renderUsers()">
               <option value="All">All roles</option>
               <option value="Admin">Admin</option>
               <option value="Trainer">Trainer</option>
               <option value="Nutritionist">Nutritionist</option>
               <option value="Member">Member</option>
             </select>
-            <select id="userStatusFilter">
+            <select id="userStatusFilter" onchange="renderUsers()">
               <option value="All">All statuses</option>
               <option value="Pending">Pending</option>
               <option value="Active">Active</option>
@@ -158,7 +158,7 @@
 
         <div class="card">
           <h3>Add a new admin</h3>
-          <form id="adminForm">
+          <form id="adminForm" onsubmit="return addAdmin()">
             <table class="form-table">
               <tr>
                 <td><label for="adminName">Full name:</label></td>
@@ -193,8 +193,8 @@
 
         <div class="card">
           <div class="search-bar">
-            <input type="text" id="paymentSearch" placeholder="Search by member, transaction ID or payment ID...">
-            <select id="paymentStatusFilter">
+            <input type="text" id="paymentSearch" placeholder="Search by member, transaction ID or payment ID..." onkeyup="renderPayments()">
+            <select id="paymentStatusFilter" onchange="renderPayments()">
               <option value="All">All statuses</option>
               <option value="Pending">Pending</option>
               <option value="Verified">Verified</option>
@@ -229,9 +229,9 @@
         <div class="card">
           <h3>Needs your action</h3>
           <p><span id="todoApprovals"></span>
-             <button type="button" class="btn btn-small">Review sign-ups</button></p>
+             <button type="button" class="btn btn-small" onclick="openPendingUsers()">Review sign-ups</button></p>
           <p><span id="todoPayments"></span>
-             <button type="button" class="btn btn-small">Verify payments</button></p>
+             <button type="button" class="btn btn-small" onclick="openPendingPayments()">Verify payments</button></p>
         </div>
 
         <div class="row">
@@ -255,5 +255,9 @@
   <footer class="footer">
     &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
   </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>
