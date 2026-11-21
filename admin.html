@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <!-- Admin dashboard. Made by: Mirza Mohammad Rakib -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin dashboard of FitHub Gym">
+  <title>Admin | FitHub Gym</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Fit<span>Hub</span></a>
+    <div class="user-info">
+      <span class="badge purple">Admin</span>
+      <span>Welcome, Mirza Mohammad Rakib</span>
+      <a href="login.html" class="btn btn-small btn-light">Logout</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+      <a href="#plansSection" id="nav-plansSection">Membership Plans</a>
+      <a href="#usersSection" id="nav-usersSection">User Approval</a>
+      <a href="#paymentsSection" id="nav-paymentsSection">Payment Verification</a>
+      <a href="#statsSection" id="nav-statsSection">Gym Statistics</a>
+  </nav>
+
+  <main class="container">
+
+      <!-- Membership plans: create, read, update, delete and search -->
+      <section id="plansSection" class="page-section">
+        <h2 class="page-title">Membership Plans</h2>
+        <p class="page-subtitle">Plans shown on the home page, the sign-up form and the member's payment form.
+          A plan that a member is using cannot be deleted.</p>
+
+        <div id="planMessage" class="message"></div>
+
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h3 id="planFormTitle">New Plan</h3>
+              <form id="planForm">
+                <fieldset>
+                  <legend>Plan details</legend>
+                  <table class="form-table">
+                    <tr>
+                      <td><label for="planName">Plan name:</label></td>
+                      <td><input type="text" id="planName" placeholder="e.g. Gold Yearly">
+                          <span class="error" id="planNameError"></span></td>
+                    </tr>
+                    <tr>
+                      <td><label for="planPrice">Price (BDT):</label></td>
+                      <td><input type="number" id="planPrice" min="500" max="20000" placeholder="500 - 20000">
+                          <span class="error" id="planPriceError"></span></td>
+                    </tr>
+                    <tr>
+                      <td><label for="planMonths">Duration:</label></td>
+                      <td>
+                        <select id="planMonths">
+                          <option value="">-- Months --</option>
+                          <option value="1">1 month</option>
+                          <option value="3">3 months</option>
+                          <option value="6">6 months</option>
+                          <option value="12">12 months</option>
+                          <option value="24">24 months</option>
+                        </select>
+                        <span class="error" id="planMonthsError"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Status:</td>
+                      <td>
+                        <input type="radio" id="statusActive" name="planStatus" value="Active">
+                        <label for="statusActive" class="option-label">Active</label>
+                        <input type="radio" id="statusInactive" name="planStatus" value="Inactive">
+                        <label for="statusInactive" class="option-label">Inactive</label>
+                        <span class="error" id="planStatusError"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </fieldset>
+                <fieldset>
+                  <legend>Facilities</legend>
+                  <input type="checkbox" id="facGym" name="planFacilities" value="Gym floor"><label for="facGym" class="option-label">Gym floor</label>
+                  <input type="checkbox" id="facCardio" name="planFacilities" value="Cardio zone"><label for="facCardio" class="option-label">Cardio zone</label>
+                  <input type="checkbox" id="facClasses" name="planFacilities" value="Classes"><label for="facClasses" class="option-label">Classes</label>
+                  <input type="checkbox" id="facLocker" name="planFacilities" value="Locker"><label for="facLocker" class="option-label">Locker</label>
+                  <input type="checkbox" id="facSauna" name="planFacilities" value="Sauna"><label for="facSauna" class="option-label">Sauna</label>
+                  <span class="error" id="planFacilitiesError"></span>
+                </fieldset>
+                <input type="submit" id="planSaveButton" class="btn" value="Save Plan">
+                <input type="reset" class="btn btn-secondary" value="Cancel">
+              </form>
+            </div>
+          </div>
+
+          <div class="col-wide">
+            <div class="card">
+              <h3>All plans</h3>
+              <div class="search-bar">
+                <input type="text" id="planSearch" placeholder="Search by plan name or facility...">
+                <select id="planStatusFilter">
+                  <option value="All">All statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+              <p class="result-count" id="planCount"></p>
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>ID</th><th>Plan</th><th>Price</th><th>Months</th><th>Facilities</th><th>Status</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody id="planTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 1: user approval -->
+      <section id="usersSection" class="page-section">
+        <h2 class="page-title">User Approval</h2>
+        <p class="page-subtitle">Approve new trainers and nutritionists, block or unblock users, and add another admin.</p>
+
+        <div id="userMessage" class="message"></div>
+
+        <div class="card">
+          <div class="search-bar">
+            <input type="text" id="userSearch" placeholder="Search by name, username or email...">
+            <select id="userRoleFilter">
+              <option value="All">All roles</option>
+              <option value="Admin">Admin</option>
+              <option value="Trainer">Trainer</option>
+              <option value="Nutritionist">Nutritionist</option>
+              <option value="Member">Member</option>
+            </select>
+            <select id="userStatusFilter">
+              <option value="All">All statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Active">Active</option>
+              <option value="Blocked">Blocked</option>
+            </select>
+          </div>
+          <p class="result-count" id="userCount"></p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>ID</th><th>Name</th><th>Username</th><th>Role</th><th>Details</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="userTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Add a new admin</h3>
+          <form id="adminForm">
+            <table class="form-table">
+              <tr>
+                <td><label for="adminName">Full name:</label></td>
+                <td><input type="text" id="adminName"><span class="error" id="adminNameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="adminUsername">Username:</label></td>
+                <td><input type="text" id="adminUsername"><span class="error" id="adminUsernameError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="adminEmail">Email:</label></td>
+                <td><input type="email" id="adminEmail"><span class="error" id="adminEmailError"></span></td>
+              </tr>
+              <tr>
+                <td><label for="adminPassword">Password:</label></td>
+                <td><input type="password" id="adminPassword"><span class="error" id="adminPasswordError"></span></td>
+              </tr>
+            </table>
+            <input type="submit" class="btn" value="Add Admin">
+          </form>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 2: payment verification -->
+      <section id="paymentsSection" class="page-section">
+        <h2 class="page-title">Payment Verification</h2>
+        <p class="page-subtitle">Check each bKash / Nagad transaction ID, then verify or reject it. Verifying starts or extends the
+          member's membership (30 days per plan month). Verified payments are locked.</p>
+
+        <div id="paymentMessage" class="message"></div>
+
+        <div class="card">
+          <div class="search-bar">
+            <input type="text" id="paymentSearch" placeholder="Search by member, transaction ID or payment ID...">
+            <select id="paymentStatusFilter">
+              <option value="All">All statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Verified">Verified</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+          <p class="result-count" id="paymentCount"></p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>ID</th><th>Member</th><th>Plan</th><th>Amount</th><th>Method</th><th>Trx ID</th><th>Date</th><th>Membership now</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="paymentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Unique feature 3: gym statistics -->
+      <section id="statsSection" class="page-section">
+        <h2 class="page-title">Gym Statistics</h2>
+        <p class="page-subtitle">Counted with loops from the plans, users, memberships and payments managed on the other pages.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-number" id="statMembers">0</div><div class="stat-label">Members</div></div>
+          <div class="stat-card"><div class="stat-number" id="statActive">0</div><div class="stat-label">Active memberships</div></div>
+          <div class="stat-card"><div class="stat-number" id="statExpired">0</div><div class="stat-label">Expired memberships</div></div>
+          <div class="stat-card"><div class="stat-number" id="statRevenue">0</div><div class="stat-label">Verified revenue (BDT)</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Needs your action</h3>
+          <p><span id="todoApprovals"></span>
+             <button type="button" class="btn btn-small">Review sign-ups</button></p>
+          <p><span id="todoPayments"></span>
+             <button type="button" class="btn btn-small">Verify payments</button></p>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h3>Users by role</h3>
+              <div id="roleBars"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <h3>Verified revenue by plan (BDT)</h3>
+              <div id="planBars"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 FitHub Gym &middot; CSC 3215 Web Technologies &middot; Group 04
+  </footer>
+</body>
+</html>
