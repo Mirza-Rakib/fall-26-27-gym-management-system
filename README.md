@@ -6,7 +6,7 @@ external JavaScript (form validation + DOM manipulation) from Weeks 1–6. The P
 FitHub is for small gyms in Bangladesh that still keep members, fees, attendance and diet advice
 in paper registers.
 
-> **Status:** Home, Login, Sign up and Nutritionist are uploaded. The Admin, Trainer and Member
+> **Status:** Home, Login, Sign up, Nutritionist and Admin are uploaded. The Trainer and Member
 > dashboards belong to other group members and are not uploaded yet.
 
 ## How to run
@@ -17,7 +17,8 @@ All users use the **same login page**; the role stored in the account decides wh
 | Role | Username | Password |
 |---|---|---|
 | Nutritionist | `nutritionist` | `nutri1234` |
-| Admin / Trainer / Member | `admin` / `trainer` / `member` | `admin1234` / `trainer123` / `member123` (dashboards not uploaded yet) |
+| Admin | `admin` | `admin1234` |
+| Trainer / Member | `trainer` / `member` | `trainer123` / `member123` (dashboards not uploaded yet) |
 | Trainer waiting for approval | `berry` | `berry1234` (login refused until an admin approves) |
 
 > **Frontend only:** data lives in JavaScript arrays (`js/data.js`) and resets when the page reloads.
@@ -29,12 +30,13 @@ All users use the **same login page**; the role stored in the account decides wh
 ├── login.html          One login page for all users
 ├── register.html       One sign up page; fields change with the user type
 ├── nutritionist.html   Nutritionist dashboard
+├── admin.html          Admin dashboard
 ├── css/style.css       One external style sheet for every page
 ├── js/
 │   ├── data.js         Sample data (arrays of objects)
 │   ├── common.js       Shared helpers (validation, dates, search)
-│   ├── home.js  login.js  register.js  nutritionist.js   One script per page
-└── project-evaluation/ CO3 form
+│   ├── home.js  login.js  register.js  nutritionist.js  admin.js   One script per page
+└── project-evaluation/ CO3 forms
 ```
 
 Scripts load at the end of `<body>`: `data.js` → `common.js` → the page's own script.
@@ -51,6 +53,10 @@ Scripts load at the end of `<body>`: `data.js` → `common.js` → the page's ow
   1. **Calorie Calculator** (Mifflin–St Jeor) → "Create a diet plan with this"
   2. **Macro Split Guide** (protein / carbs / fat by goal, uses `switch`)
   3. **Meal Planner** (foods per meal, calories and protein against the targets, "Save to Diet Plan")
+- **Admin:** CRUD + search on membership plans, plus 3 features:
+  1. **User Approval** (approve / reject / block users, add another admin)
+  2. **Payment Verification** (bKash / Nagad; verifying starts or extends the membership)
+  3. **Gym Statistics** (summary cards, bar charts and a "needs your action" list)
 
 ## How CRUD works (same pattern everywhere)
 
@@ -78,6 +84,6 @@ Arrays → MySQL tables · `validateLogin()` → `login.php` with `$_SESSION` ·
 | Member | ID | Part | Status |
 |---|---|---|---|
 | AKTER, MOHONA (leader) | 23-53200-3 | Home, Login, Sign up, Nutritionist, shared base, README | Uploaded |
-| RAKIB, MIRZA MOHAMMAD | 23-53160-3 | `admin.html`, `js/admin.js` | Not uploaded yet |
+| RAKIB, MIRZA MOHAMMAD | 23-53160-3 | `admin.html`, `js/admin.js` | Uploaded |
 | JUBAYER, KHONDOKER MD ASIF | 23-51038-1 | `trainer.html`, `js/trainer.js` | Not uploaded yet |
 | BHUIYAN, TANVIR HOSSAIN | 22-46731-1 | `member.html`, `js/member.js` | Not uploaded yet |
