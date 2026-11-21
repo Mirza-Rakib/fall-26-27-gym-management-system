@@ -36,7 +36,8 @@ All users use the **same login page**; the role stored in the account decides wh
 │   ├── data.js         Sample data (arrays of objects)
 │   ├── common.js       Shared helpers (validation, dates, search)
 │   ├── home.js  login.js  register.js  nutritionist.js  admin.js   One script per page
-└── project-evaluation/ CO3 forms
+├── image/              Screenshots used in the CO3 forms
+└── doc/                CO3 forms, one per member
 ```
 
 Scripts load at the end of `<body>`: `data.js` → `common.js` → the page's own script.
